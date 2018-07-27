@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index2</h2>
+
+<br />
+<div class="container">
+    <button id="btnLoad" type="button" class="btn btn-success">
+        Verileri Çağır
+    </button>
+
+    <button id="btnUpload" type="button" class="btn btn-success left">
+        Verileri Yükle &amp;
+    </button>
+    <br />
+    <br /> <br />
+
+    <input type="text" class="form-control col-md-6" id="txtData" placeholder="Veri Girişi" style:"width:200px;" />
+
+</div>
+
+<hr />
+
+<div id="loading" class="alert alert-warning" style="display:none;">
+    Loading .........
+</div>
+
+<ul id="list" class="list-group">
+
+</ul>
+
+
+<script>
+    $(function () {
+        $("#btnLoad").click(function () {
+            $("#loading").show(300, function () {
+                $("#list").load("/Home/VerileriGetir", function () {
+                    $("#loading").hide(300);
+                });
+                
+            });
+            //Bir elementten sonra çağrıyoruz. (GeT işleminden farklı olarak )  
+        });
+
+
+        $("#btnUpload").click(function () {
+            $("#loading").show(300);
+
+            //Bir elementten sonra çağrıyoruz. (GeT işleminden farklı olarak daha kısa kodlarla)
+            var data = $("#txtData").val();
+            $("#list").load("/Home/VerileriGetir", { veri: data }, function (){
+                $("#loading").hide(300);
+            });
+
+        })
+
+
+    })
+
+
+
+</script>
+

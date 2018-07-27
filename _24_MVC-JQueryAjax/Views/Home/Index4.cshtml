@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Index4";
+}
+
+<h2>Index4</h2>
+
+<br />
+<div class="container">
+    <button id="btnLoad" type="button" class="btn btn-success col-md-2 col-sm-offset-1">
+        Verileri Çağır
+    </button>
+
+    <button id="btnUpload" type="button" class="btn btn-success col-md-2 col-sm-offset-1">
+        Verileri Yükle &amp;
+    </button>
+    <br />
+    <br /> <br />
+
+    <input type="text" class="form-control col-md-8 col-sm-offset-2" id="txtData" placeholder="Veri Girişi" style:"width:200px;" />
+
+</div>
+
+<hr />
+
+<div id="loading" class="alert alert-warning" style="display:none;">
+    Loading .........
+</div>
+
+<ul id="list" class="list-group"></ul>
+
+<script>
+    $(function () {
+
+        $("#btnLoad").click(function () {
+
+            $.ajax(
+                {
+                    method: "GET",
+                    url: "/Home/VerileriGetir2",
+                    //Ajax talebi gösterilmeden önce çalışacak gösterme fonksiyonu
+                    beforeSend: function () {
+                        $("#list").empty();
+                        $("#loading").show(300);
+                    }
+
+                }).done(function (x) {
+                    //Gelen Data Json olacak
+                    //Liste bize jsonda dizi olarak gelir .. 
+                    //for in fonksiyonu -> verilen dizide döner Json olarak gelen datayı JS dizisi olarak algılar.
+
+                    console.log(x)
+
+                    //parametre olarak functiondan alınan x veriyoruz
+                    for (var i in x) {
+                        var dd = x[i];
+
+                        //li etiketini kendimiz oluşturup bunun nereye yerleştireceğini JS içinde kendimiz belirteceğiz ...
+                        //PartialView kullanmadığımız için HTML etiketini yazmak zorundayız.
+                        var li = $("<li class='list-group-item'></li>");
+                        li.html(dd);
+
+                        $("#list").append(li);
+                    }
+                    //$("#list").html(x);
+                }).fail(function () {
+                    alert("Hata Oluştu ..");
+                }).always(function () {
+                    $("#loading").hide(300);
+                });
+        });
+
+
+        //AJAX ile Post Gönderme
+        $("#btnUpload").click(function()
+        {
+            //Json objesi olarak süslü parantezler arasına parametreleri veriyrouz
+              var data = $("#txtData").val();
+              $.ajax(
+                {
+                    method: "POST",
+                    url: "/Home/VerileriGetir2",
+                    data: {veri:data},
+                    beforeSend: function () {
+                        $("#list").empty();
+                        $("#loading").show(300);
+                    }
+                }).done(function (x) {
+
+                    for (var i in x) {
+                        var dd = x[i];
+
+                        var li = $("<li class='list-group-item'></li>");
+                        li.html(dd);
+
+                        $("#list").append(li);
+                    }
+                    //$("#list").html(x);
+                }).fail(function () {
+                    alert("Hata Oluştu ..");
+                }).always(function () {
+                    $("#loading").hide(300);
+                });
+        });
+    });
+
+</script>

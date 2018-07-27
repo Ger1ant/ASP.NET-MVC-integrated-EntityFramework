@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Index3";
+}
+
+<h2>Index3</h2>
+
+<br />
+<div class="container">
+    <button id="btnLoad" type="button" class="btn btn-success col-md-2 col-sm-offset-1">
+        Verileri Çağır
+    </button>
+
+    <button id="btnUpload" type="button" class="btn btn-success col-md-2 col-sm-offset-1">
+        Verileri Yükle &amp;
+    </button>
+    <br />
+    <br /> <br />
+
+    <input type="text" class="form-control col-md-8 col-sm-offset-2" id="txtData" placeholder="Veri Girişi" style:"width:200px;" />
+
+</div>
+
+<hr />
+
+<div id="loading" class="alert alert-warning" style="display:none;">
+    Loading .........
+</div>
+
+<ul id="list" class="list-group">
+
+</ul>
+
+<script>
+    $(function () {
+
+        $("#btnLoad").click(function () {
+            
+            $.ajax(
+                {
+                    method: "GET",
+                    url: "/Home/VerileriGetir",
+                    //Ajax talebi gösterilmeden önce çalışacak gösterme fonksiyonu
+                    beforeSend: function () {
+                        $("#list").empty();
+                        $("#loading").show(300);
+                    }
+
+                }).done(function (x) {
+                    //Bu metot bize bir Partial Dönüyor
+                    $("#list").html(x);
+                }).fail(function () {
+                    alert("Hata Oluştu ..");
+                }).always(function () {
+                    $("#loading").hide(300);
+                });
+        });
+
+
+        //AJAX ile Post Gönderme
+        $("#btnUpload").click(function()
+        {
+            //Json objesi olarak süslü parantezler arasına parametreleri veriyrouz
+              var data = $("#txtData").val();
+              $.ajax(
+                {
+                    method: "POST",
+                    url: "/Home/VerileriGetir",
+                    data: {veri:data},
+                      beforeSend: function () {
+                        $("#list").empty();
+                        $("#loading").show(300);
+                    }
+                }).done(function (x) {
+                      //Bu metot bize bir Partial Dönüyor
+                    $("#list").html(x);
+                }).fail(function () {
+                    alert("Hata Oluştu ..");
+                }).always(function () {
+                    $("#loading").hide(300);
+                });
+        });
+    });
+
+</script>

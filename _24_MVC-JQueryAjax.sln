@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_24_MVC-JQueryAjax", "_24_MVC-JQueryAjax\_24_MVC-JQueryAjax.csproj", "{82373ED9-39F5-4606-BB47-34EACE8140CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JqueryAjaxFileUpload", "JqueryAjaxFileUpload\JqueryAjaxFileUpload.csproj", "{F0E5AF47-B099-4A25-B1B0-7355575A9D25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82373ED9-39F5-4606-BB47-34EACE8140CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82373ED9-39F5-4606-BB47-34EACE8140CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82373ED9-39F5-4606-BB47-34EACE8140CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82373ED9-39F5-4606-BB47-34EACE8140CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E5AF47-B099-4A25-B1B0-7355575A9D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E5AF47-B099-4A25-B1B0-7355575A9D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E5AF47-B099-4A25-B1B0-7355575A9D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E5AF47-B099-4A25-B1B0-7355575A9D25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26363FED-30EE-46D2-97E9-8C1D1FA0844B}
+	EndGlobalSection
+EndGlobal

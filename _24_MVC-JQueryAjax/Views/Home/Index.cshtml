@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index - Home Controller</h2>
+
+<br />  
+<div class="container">
+    <button id="btnLoad" type="button" class="btn btn-success col-md-12">
+        Verileri Çağır
+    </button>
+
+    <button id="btnUpload" type="button" class="btn btn-success col-md-12">
+        Verileri Yükle &amp;
+    </button>
+    <br />
+    <br /> <br />
+
+    <input type="text" class="form-control col-md-6" id="txtData" placeholder="Veri Girişi" style:"width:200px;" />
+
+</div>
+
+<hr />
+
+<div id="loading" class="alert alert-warning" style="display:none;">
+    Loading .........
+</div>
+
+<ul id="list" class="list-group">
+    
+</ul>
+
+
+<script>
+
+    $(function () {
+
+        $("#btnLoad").click(function () {
+
+            $("#list").empty();
+            //Show metodu 2. parametre olarak verileri 300 ms beklettikten sonra gösterme işlemi ve verileri getirdikten sonra gizleme işleminiiçine alır
+            $("#loading").show(300, function () {
+                //verileri getireceği url : ve Verilerin html olarak ekleneceği attribitute id  eklendikten sonra button loading'i gizleme işlemi
+                $.get("/Home/VerileriGetir", function (v) {
+                    $("#list").html(v);
+                }).fail(function () {
+                        alert("Hata Oluştu");
+                }).always(function () { //Hatada Olsa bu kodu her zaman çalıştır..
+                   $("#loading").hide(300);
+                });
+            });
+        });   
+       
+
+       $("#btnUpload").click(function () {
+
+            $("#list").empty();
+
+            $("#loading").show(300, function () {
+                var data = $("#txtData").val();
+                //Veriyi almak istiyorsak 2. parametrede Anahtar Olan veri keywordu ile C#'ta verdiğimiz parametre ismi aynı olmalıdır 
+                $.get("/Home/VerileriGetir", { veri: data }, function (v) {
+                    $("#list").html(v);
+                }).fail(function () {
+                    alert("Hata Oluştu");
+                }).always(function () { //Hatada Olsa bu kodu her zaman çalıştır..
+                    $("#loading").hide(300);
+                });
+            });
+        });
+
+
+
+
+
+    });
+    
+ 
+
+
+</script>

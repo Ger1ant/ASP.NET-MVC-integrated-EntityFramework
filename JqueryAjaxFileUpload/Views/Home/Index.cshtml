@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                AJAX İLE DOSYA YÜKLEME
+            </h2>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            @*<form enctype="multipart/form-data" action="/Home/Index" method="post">
+                Form elementi Dosya Resim vs göndericek ise enctype Attributeunu kullanıp multipart özelliği olması gerekiyor bunu HTML BEGİN FORM DA EKLEYECEĞİZ
+            </form>*@
+
+
+            <!--Normade Form Elementine gerek yok Ajax'dan veriyi almak için kullandık .... Submit Butonuyla da Jquerye gerek kalmadan yapabilirdik.-->
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                //Parametre olarak Controllerda verilen FileBase ile aynı name i taşıyacağı için veriyi otomatik alırız.
+                <input type="file" name="file" id="file" class="form-control" />
+
+
+                <!--Submit tipinde yapmadık çünkü formu Ajax ile gönderme işlemi yapacağız...-->
+                <input type="button" id="btnSendFile" value="Send File" class="btn btn-success" />            
+            
+            }
+
+
+                <script>
+
+                        $("#btnSendFile").click(function () {
+                            // name attribute'una göre formData oluşturma
+                            //Bunlarla çalışmadı
+                            //var formData=new FormData($("[name='files']")[0]);
+
+                            //id 'ye göre oluşturduk
+                            //Bunlarla çalışmadı
+                            //var formData = new FormData($("#file"));
+
+                            //form un 0. indexindeki Değeri alıyor
+                            var formData = new FormData($("form").get(0));
+
+                            $.ajax({
+                                method: "POST",
+                                url:'@Url.Action("FileUpload","Home")',
+                                data: formData,
+                                processData: false,
+                                contentType: false
+                            }).done(function (result) {
+                                if (result.hasError == false) {
+                                    alert(result.message);
+                                }
+                                else {
+                                    alert("Resim Null Geldi .... !!!");
+                                }
+                            });
+
+                        });
+                </script>
+
+
+        </div>
+    </div>
+
+
+</div>
